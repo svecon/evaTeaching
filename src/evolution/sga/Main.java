@@ -116,7 +116,7 @@ public class Main {
 
         //Set the options for the evolutionary algorithm
         EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm();
-        ea.setFitnessFunction(new ExampleFitnessFunction());
+        ea.setFitnessFunction(new AlternatingFitnessFunction());
         ea.addMatingSelector(new RouletteWheelSelector());
         ea.addOperator(new OnePtXOver(xoverProb));
         ea.addOperator(new BitFlipMutation(mutProb, mutProbPerBit));
