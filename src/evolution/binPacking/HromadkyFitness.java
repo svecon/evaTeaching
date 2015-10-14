@@ -36,6 +36,9 @@ public class HromadkyFitness implements FitnessFunction {
 
         int[] binWeights = getBinWeights(ind);
 
+        double squares = 0;
+        double sum = 0;
+        
         double min = Integer.MAX_VALUE;
         double max = Integer.MIN_VALUE;
         for (int i = 0; i < K; i++) {
@@ -45,12 +48,19 @@ public class HromadkyFitness implements FitnessFunction {
             if (binWeights[i] > max) {
                 max = binWeights[i];
             }
+            
+            sum += binWeights[i];
+            squares += binWeights[i]*binWeights[i];
         }
 
         ind.setObjectiveValue(max - min);    // tohle doporucuji zachovat
+        
+        double average = sum / K;
+        
+        return 2 / Math.pow(Math.log(
+            (squares - (K*average*average)) / K
+        ), 1);
 
-        //sem muzete vlozit vlastni vypocet fitness, muzete samozrejme vyuzit spocitane hmotnosti hromadek
-
-        return 1 / (max - min);
+//        return 1 / (max - min);
     }
 }
