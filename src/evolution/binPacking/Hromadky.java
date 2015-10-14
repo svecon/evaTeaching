@@ -127,6 +127,7 @@ public class Hromadky {
             EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm();
             HromadkyFitness fitness = new HromadkyFitness(weights, K);
             ea.setFitnessFunction(fitness);
+            ea.setElite(0.1);
             ea.addMatingSelector(new RouletteWheelSelector());
             ea.addOperator(new OnePtXOver(xoverProb));
             ea.addOperator(new IntegerMutation(mutProb, mutProbPerBit));
