@@ -35,9 +35,14 @@ public class HromadkyFitness implements FitnessFunction {
     public double evaluate(Individual ind) {
 
         int[] binWeights = getBinWeights(ind);
-
-        double squares = 0;
+        
         double sum = 0;
+        for (int i = 0; i < K; i++) {
+            sum += binWeights[i];
+        }
+        
+        double squares = 0;
+        double average = sum / K;
         
         double min = Integer.MAX_VALUE;
         double max = Integer.MIN_VALUE;
@@ -48,19 +53,24 @@ public class HromadkyFitness implements FitnessFunction {
             if (binWeights[i] > max) {
                 max = binWeights[i];
             }
-            
-            sum += binWeights[i];
-            squares += binWeights[i]*binWeights[i];
+
+            squares += Math.pow(binWeights[i]-average, 2);
         }
 
         ind.setObjectiveValue(max - min);    // tohle doporucuji zachovat
         
-        double average = sum / K;
-        
-        return 2 / Math.pow(Math.log(
-            (squares - (K*average*average)) / K
-        ), 1);
+        double s = Math.sqrt(squares / K);
+        return 1 / s;
+//        double average = sum / K;
+//        double prumersq = (average*average);
+//        double so = Math.sqrt((squares/K)-prumersq);
+//        
+////        return 1 / (1 + average - so);
+//        
+//        return (1 / Math.pow((
+//            (squares - prumersq) / K
+//        ), 1));
 
-//        return 1 / (max - min);
+//        return 1 / (max - min + 1);
     }
 }

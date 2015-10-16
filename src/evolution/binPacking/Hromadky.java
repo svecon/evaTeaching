@@ -5,7 +5,7 @@ import evolution.individuals.Individual;
 import evolution.individuals.IntegerIndividual;
 import evolution.operators.IntegerMutation;
 import evolution.operators.OnePtXOver;
-import evolution.selectors.RouletteWheelSelector;
+import evolution.selectors.*;
 
 import java.io.*;
 import java.util.*;
@@ -128,10 +128,10 @@ public class Hromadky {
             HromadkyFitness fitness = new HromadkyFitness(weights, K);
             ea.setFitnessFunction(fitness);
             ea.setElite(0.1);
-            ea.addMatingSelector(new RouletteWheelSelector());
+            ea.addMatingSelector(new TournamentSelector());
             ea.addOperator(new OnePtXOver(xoverProb));
             ea.addOperator(new IntegerMutation(mutProb, mutProbPerBit));
-            ea.addEnvironmentalSelector(new RouletteWheelSelector());
+            ea.addEnvironmentalSelector(new TournamentSelector());
 
             OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(fitnessFilePrefix + "." + number));
             OutputStreamWriter progOut = new OutputStreamWriter(new FileOutputStream(objectiveFilePrefix + "." + number));
