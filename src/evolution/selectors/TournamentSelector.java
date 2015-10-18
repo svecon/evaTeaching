@@ -17,7 +17,7 @@ public class TournamentSelector implements Selector {
             int i1 = rng.nextInt(from.getPopulationSize());
             int i2 = rng.nextInt(from.getPopulationSize());
 
-            if ((from.get(i1).getFitnessValue() > from.get(i2).getFitnessValue()) && rng.nextDouble() < 0.77) {
+            if ((from.get(i1).getFitnessValue() > from.get(i2).getFitnessValue()) && rng.nextDouble() < 0.75) {
                 to.add((Individual) from.get(i1).clone());
                 from.get(i1).setLogNotes(from.get(i1).getLogNotes() + " " + this.getClass().getCanonicalName());
             }
