@@ -3,8 +3,7 @@ package evolution.binPacking;
 import evolution.*;
 import evolution.individuals.Individual;
 import evolution.individuals.IntegerIndividual;
-import evolution.operators.IntegerMutation;
-import evolution.operators.OnePtXOver;
+import evolution.operators.*;
 import evolution.selectors.*;
 
 import java.io.*;
@@ -130,7 +129,7 @@ public class Hromadky {
             ea.setElite(0.135);
             ea.addMatingSelector(new TournamentSelector());
             ea.addOperator(new OnePtXOver(xoverProb));
-            ea.addOperator(new IntegerMutation(mutProb, mutProbPerBit));
+            ea.addOperator(new SwappingMutationOperator(mutProb, mutProbPerBit));
             ea.addEnvironmentalSelector(new TournamentSelector());
 
             OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(fitnessFilePrefix + "." + number));
